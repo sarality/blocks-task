@@ -1,7 +1,5 @@
 package com.sarality.task;
 
-import java.util.List;
-
 /**
  * Interface for the task to be run within an AsyncTask
  *
@@ -9,5 +7,5 @@ import java.util.List;
  */
 public interface Task<I, P, R> {
 
-  R execute(List<I> inputList, TaskProgressPublisher<P> progressPublisher);
+  R execute(I input, TaskProgressPublisher<P> progressPublisher);
 }

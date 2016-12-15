@@ -2,8 +2,6 @@ package com.sarality.task;
 
 import android.os.AsyncTask;
 
-import java.util.Arrays;
-
 /**
  * Executes an Task in an background thread.
  *
@@ -28,11 +26,11 @@ public class AsyncTaskExecutor<I, P, R> extends AsyncTask<I, P, R> implements Ta
   }
 
   @Override
-  protected R doInBackground(I... params) {
-    if (params == null) {
+  protected R doInBackground(I... inputs) {
+    if (inputs == null) {
       return task.execute(null, this);
     } else {
-      return task.execute(Arrays.asList(params), this);
+      return task.execute(inputs[0], this);
     }
   }
 
@@ -45,11 +43,11 @@ public class AsyncTaskExecutor<I, P, R> extends AsyncTask<I, P, R> implements Ta
   }
 
   @Override
-  protected void onProgressUpdate(P... values) {
-    super.onProgressUpdate(values);
+  protected void onProgressUpdate(P... progress) {
+    super.onProgressUpdate(progress);
     if (progressListener != null) {
-      if (values != null) {
-        progressListener.onProgressUpdate(values[0]);
+      if (progress != null) {
+        progressListener.onProgressUpdate(progress[0]);
       } else {
         progressListener.onProgressUpdate(null);
       }
