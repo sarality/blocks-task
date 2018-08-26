@@ -26,7 +26,8 @@ public class AsyncTaskExecutor<I, P, R> extends AsyncTask<I, P, R> implements Ta
   }
 
   @Override
-  protected R doInBackground(I... inputs) {
+  @SafeVarargs
+  protected final R doInBackground(I... inputs) {
     if (inputs == null) {
       return task.execute(null, this);
     } else {
@@ -43,7 +44,8 @@ public class AsyncTaskExecutor<I, P, R> extends AsyncTask<I, P, R> implements Ta
   }
 
   @Override
-  protected void onProgressUpdate(P... progress) {
+  @SafeVarargs
+  protected final void onProgressUpdate(P... progress) {
     super.onProgressUpdate(progress);
     if (progressListener != null) {
       if (progress != null) {
@@ -55,6 +57,7 @@ public class AsyncTaskExecutor<I, P, R> extends AsyncTask<I, P, R> implements Ta
   }
 
   @Override
+  @SuppressWarnings("unchecked")
   public void updateProgress(P progress) {
     publishProgress(progress);
   }
